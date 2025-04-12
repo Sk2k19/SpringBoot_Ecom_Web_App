@@ -1,4 +1,4 @@
-package productservice8apr.productservice8apr.dtos;
+package productservice8apr.productservice8apr.dtos.product;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import productservice8apr.productservice8apr.models.Product;
 public class CreateProductRequestDto {
     String title;
     String description;
-    Long price;
+    double price;
     String category;
     String imageUrl;
 
