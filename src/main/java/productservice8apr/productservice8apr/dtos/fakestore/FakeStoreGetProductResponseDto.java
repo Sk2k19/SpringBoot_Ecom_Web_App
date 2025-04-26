@@ -19,7 +19,7 @@ public class FakeStoreGetProductResponseDto {
         product1.setId(this.getId());
         product1.setDescription(this.getDescription());
         product1.setPrice(this.getPrice());
-        product1.setCategoryName(this.getCategory());
+        product1.getCategory().setName(this.getCategory());
         product1.setImageUrl(this.getImage());
         return product1;
     }

@@ -9,7 +9,7 @@ public class GetProductDto {
     private Long id;
     private String title;
     private String description;
-    private double price;
+    private Double price;
     private String category;
     private String image;
 
@@ -19,7 +19,7 @@ public class GetProductDto {
         productRespomseDto.setTitle(product.getTitle());
         productRespomseDto.setDescription(product.getDescription());
         productRespomseDto.setPrice(product.getPrice());
-        productRespomseDto.setCategory(product.getCategoryName());
+        productRespomseDto.setCategory(product.getCategory().getName());
         productRespomseDto.setImage(product.getImageUrl());
         return productRespomseDto;
     }

@@ -21,6 +21,7 @@ public class CreateProductResponseDto {
         responseDto.setDescription(product.getDescription());
         responseDto.setImageUrl(product.getImageUrl());
         responseDto.setPrice(product.getPrice());
+        responseDto.setCategory(product.getCategory().getName());
         return responseDto;
     }
 

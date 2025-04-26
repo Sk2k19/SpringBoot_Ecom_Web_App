@@ -3,7 +3,7 @@ package productservice8apr.productservice8apr.services;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import productservice8apr.productservice8apr.Exceptions.InvalidProductIdExp;
+import productservice8apr.productservice8apr.Exceptions.productNotFoundException;
 import productservice8apr.productservice8apr.dtos.fakestore.FakeStoreProductCreateRequestDto;
 import productservice8apr.productservice8apr.dtos.fakestore.FakeStoreGetProductResponseDto;
 import productservice8apr.productservice8apr.models.Product;
@@ -29,7 +29,7 @@ public class ProductServiceFakeStoreImpl implements ProductService {
          request.setTitle(product.getTitle());
          request.setDescription(product.getDescription());
          request.setPrice(product.getPrice());
-         request.setCategory(product.getCategoryName());
+         request.setCategory(String.valueOf(product.getCategory()));
          request.setImage(product.getImageUrl());
 
          FakeStoreGetProductResponseDto response = restTemplate.postForObject("https://fakestoreapi.com/products", request, FakeStoreGetProductResponseDto.class);
@@ -57,7 +57,7 @@ public class ProductServiceFakeStoreImpl implements ProductService {
      @Override
     public Product updateProduct(Long productId,Product product) {
         if(productId <=0){
-            throw new InvalidProductIdExp("Product id invalid "+productId);
+            throw new productNotFoundException("Product id invalid "+productId);
 
         }
         FakeStoreGetProductResponseDto productResponse =  restTemplate.patchForObject(
@@ -66,5 +66,14 @@ public class ProductServiceFakeStoreImpl implements ProductService {
                FakeStoreGetProductResponseDto.class
         );
         return productResponse.toProduct();
+     }
+     @Override
+     public void deleteProduct(Long productId) {
+        return ;
+     }
+
+     @Override
+    public Product getProductById(Long productId) {
+        return null;
      }
 }

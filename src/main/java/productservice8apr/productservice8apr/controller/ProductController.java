@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductController {
 
     private ProductService productService ;
-    public ProductController(@Qualifier("ProductServiceFakeStoreImpl")ProductService productService) {
+    public ProductController(@Qualifier("productServiceDbImpl")ProductService productService) {
         this.productService = productService;
     }
 
@@ -41,29 +41,31 @@ public class ProductController {
         responseDto.setProducts(productResponseDtos);
         return responseDto;
     }
+
     @PatchMapping("/{id}")
     public PatchGetProductResponseDto upadateProduct(@PathVariable("id") Long productId,
-                                                    @RequestBody CreateProductDto createProductDto){
+                                                    @RequestBody UpdateProductDto updateProductDto){
+
         Product product = productService.updateProduct(
-                productId,createProductDto.toProduct()
+                productId,updateProductDto.toProduct()
         );
+
+
         PatchGetProductResponseDto responseDto = new PatchGetProductResponseDto();
         responseDto.setGetProduct(GetProductDto.from(product));
-        return null;
+        return responseDto;
 
     }
     @GetMapping("/{id}")
-    public String GetSingleProductById(@PathVariable("id") Long id){
-        return "Details of product with id : " + id+" found";
+    public getProductResponseDto getProductById(@PathVariable("id") Long productIdd){
+        Product product = productService.getProductById(productIdd);
+        getProductResponseDto responseDtos = new getProductResponseDto();
+        responseDtos.setProduct(GetProductDto.from(product));
+        return responseDtos;
+    }
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable("id") Long id){
+        productService.deleteProduct(id);
     }
 
-
-
-//    @PostMapping("/")
-//    public String CreateProduct( @RequestBody CreateProductRequestDto requestDto){
-//        requestDto.setPrice(120222L);
-//        return "This is the price of product: " + requestDto.getPrice();
-//
-//
-//    }
 }

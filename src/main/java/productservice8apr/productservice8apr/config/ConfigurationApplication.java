@@ -9,4 +9,5 @@ public class ConfigurationApplication {
     public RestTemplate createRestTemplate() {
         return new RestTemplate();
     }
+
 }
